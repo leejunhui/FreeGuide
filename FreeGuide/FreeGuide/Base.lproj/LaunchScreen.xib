@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeguide.png" translatesAutoresizingMaskIntoConstraints="NO" id="gM1-Ws-ITb">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="gM1-Ws-ITb">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
@@ -27,6 +27,6 @@
         </view>
     </objects>
     <resources>
-        <image name="freeguide.png" width="750" height="1334"/>
+        <image name="LaunchImg.png" width="621" height="1104"/>
     </resources>
 </document>
