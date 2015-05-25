@@ -20,6 +20,8 @@
 		2D74C9DA1B136C6300899BF5 /* UIImage+LJH.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9D81B136C6300899BF5 /* UIImage+LJH.m */; };
 		2D74C9DF1B136C6C00899BF5 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D74C9DC1B136C6C00899BF5 /* ProgressHUD.bundle */; };
 		2D74C9E01B136C6C00899BF5 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */; };
+		2D74C9E21B136FD300899BF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E11B136FD300899BF5 /* CoreLocation.framework */; };
+		2D74C9E41B136FDA00899BF5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		2D74C9DC1B136C6C00899BF5 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 		2D74C9DD1B136C6C00899BF5 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		2D74C9E11B136FD300899BF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		63B6210BFD97BE4FEE85F8C9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D60360FCD2AA29C2518DA80B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -67,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D74C9E41B136FDA00899BF5 /* CoreBluetooth.framework in Frameworks */,
+				2D74C9E21B136FD300899BF5 /* CoreLocation.framework in Frameworks */,
 				13E7ECC288494F35D1A9189A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +259,8 @@
 		F7099F2255913ADD45CAAA5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */,
+				2D74C9E11B136FD300899BF5 /* CoreLocation.framework */,
 				D60360FCD2AA29C2518DA80B /* libPods.a */,
 			);
 			name = Frameworks;

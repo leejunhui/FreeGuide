@@ -26,6 +26,7 @@
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectZero];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
     self.mapView.showsCompass = NO;
     self.mapView.showsScale = NO;
     self.mapView.zoomLevel = kDefaultZoomLevel;
@@ -39,7 +40,6 @@
 #pragma mark - MAMapViewDelegate
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 {
-    
 }
 
 @end
