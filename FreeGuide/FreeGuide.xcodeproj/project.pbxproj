@@ -11,6 +11,12 @@
 		2D10126F1B1347A3008F9198 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D10126E1B1347A3008F9198 /* Images.xcassets */; };
 		2D1012721B1347A3008F9198 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D1012701B1347A3008F9198 /* LaunchScreen.xib */; };
 		2D10127E1B1347A3008F9198 /* FreeGuideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D10127D1B1347A3008F9198 /* FreeGuideTests.m */; };
+		2D59587B1B15686B004AF8F1 /* BeiJing.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 2D59587A1B15686B004AF8F1 /* BeiJing.gpx */; };
+		2D59587F1B156EF6004AF8F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D59587E1B156EF6004AF8F1 /* AVFoundation.framework */; };
+		2D5958811B156EFB004AF8F1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5958801B156EFB004AF8F1 /* AddressBook.framework */; };
+		2D5958831B156F06004AF8F1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5958821B156F06004AF8F1 /* SystemConfiguration.framework */; };
+		2D5958851B156F0E004AF8F1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5958841B156F0E004AF8F1 /* AudioToolbox.framework */; };
+		2D5958871B156F9D004AF8F1 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5958861B156F9D004AF8F1 /* iflyMSC.framework */; };
 		2D74C9C21B135C5E00899BF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9BE1B135C5E00899BF5 /* AppDelegate.m */; };
 		2D74C9C41B135C5E00899BF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9C01B135C5E00899BF5 /* main.m */; };
 		2D74C9C91B136A7F00899BF5 /* LaunchImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D74C9C81B136A7F00899BF5 /* LaunchImg@2x.png */; };
@@ -22,6 +28,8 @@
 		2D74C9E01B136C6C00899BF5 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */; };
 		2D74C9E21B136FD300899BF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E11B136FD300899BF5 /* CoreLocation.framework */; };
 		2D74C9E41B136FDA00899BF5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */; };
+		2DAC1FD61B1B5748005F60A1 /* FGJingDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC1FD41B1B5748005F60A1 /* FGJingDianViewController.m */; };
+		2DBADC921B15764A00471403 /* libSunFlower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBADC911B15764A00471403 /* libSunFlower.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +51,12 @@
 		2D1012771B1347A3008F9198 /* FreeGuideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeGuideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D10127C1B1347A3008F9198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D10127D1B1347A3008F9198 /* FreeGuideTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeGuideTests.m; sourceTree = "<group>"; };
+		2D59587A1B15686B004AF8F1 /* BeiJing.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BeiJing.gpx; sourceTree = "<group>"; };
+		2D59587E1B156EF6004AF8F1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2D5958801B156EFB004AF8F1 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		2D5958821B156F06004AF8F1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2D5958841B156F0E004AF8F1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2D5958861B156F9D004AF8F1 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		2D74C9BD1B135C5E00899BF5 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2D74C9BE1B135C5E00899BF5 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2D74C9BF1B135C5E00899BF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +76,10 @@
 		2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		2D74C9E11B136FD300899BF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		2DAC1FD31B1B5748005F60A1 /* FGJingDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGJingDianViewController.h; sourceTree = "<group>"; };
+		2DAC1FD41B1B5748005F60A1 /* FGJingDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGJingDianViewController.m; sourceTree = "<group>"; };
+		2DBADC901B15764A00471403 /* IFlyFlowerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyFlowerCollector.h; sourceTree = "<group>"; };
+		2DBADC911B15764A00471403 /* libSunFlower.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSunFlower.a; sourceTree = "<group>"; };
 		63B6210BFD97BE4FEE85F8C9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D60360FCD2AA29C2518DA80B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -71,6 +89,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5958851B156F0E004AF8F1 /* AudioToolbox.framework in Frameworks */,
+				2D5958831B156F06004AF8F1 /* SystemConfiguration.framework in Frameworks */,
+				2D5958811B156EFB004AF8F1 /* AddressBook.framework in Frameworks */,
+				2DBADC921B15764A00471403 /* libSunFlower.a in Frameworks */,
+				2D59587F1B156EF6004AF8F1 /* AVFoundation.framework in Frameworks */,
+				2D5958871B156F9D004AF8F1 /* iflyMSC.framework in Frameworks */,
 				2D74C9E41B136FDA00899BF5 /* CoreBluetooth.framework in Frameworks */,
 				2D74C9E21B136FD300899BF5 /* CoreLocation.framework in Frameworks */,
 				13E7ECC288494F35D1A9189A /* libPods.a in Frameworks */,
@@ -123,6 +147,7 @@
 				2D10126B1B1347A3008F9198 /* Main.storyboard */,
 				2D10126E1B1347A3008F9198 /* Images.xcassets */,
 				2D1012701B1347A3008F9198 /* LaunchScreen.xib */,
+				2D59587A1B15686B004AF8F1 /* BeiJing.gpx */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -144,6 +169,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2D5958881B15702E004AF8F1 /* Notify */ = {
+			isa = PBXGroup;
+			children = (
+				2DAC1FD31B1B5748005F60A1 /* FGJingDianViewController.h */,
+				2DAC1FD41B1B5748005F60A1 /* FGJingDianViewController.m */,
+			);
+			name = Notify;
+			sourceTree = "<group>";
+		};
 		2D74C9B91B135C5E00899BF5 /* Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +192,7 @@
 		2D74C9BA1B135C5E00899BF5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2D5958881B15702E004AF8F1 /* Notify */,
 				2D74C9CE1B136B4000899BF5 /* Home */,
 				2D74C9CD1B136B3700899BF5 /* Base */,
 			);
@@ -247,6 +282,15 @@
 			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
+		2DBADC8F1B15764900471403 /* sunflower */ = {
+			isa = PBXGroup;
+			children = (
+				2DBADC901B15764A00471403 /* IFlyFlowerCollector.h */,
+				2DBADC911B15764A00471403 /* libSunFlower.a */,
+			);
+			path = sunflower;
+			sourceTree = "<group>";
+		};
 		9132680F69AFB4481370710E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +303,12 @@
 		F7099F2255913ADD45CAAA5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DBADC8F1B15764900471403 /* sunflower */,
+				2D5958861B156F9D004AF8F1 /* iflyMSC.framework */,
+				2D5958841B156F0E004AF8F1 /* AudioToolbox.framework */,
+				2D5958821B156F06004AF8F1 /* SystemConfiguration.framework */,
+				2D5958801B156EFB004AF8F1 /* AddressBook.framework */,
+				2D59587E1B156EF6004AF8F1 /* AVFoundation.framework */,
 				2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */,
 				2D74C9E11B136FD300899BF5 /* CoreLocation.framework */,
 				D60360FCD2AA29C2518DA80B /* libPods.a */,
@@ -351,6 +401,7 @@
 			files = (
 				2D74C9DF1B136C6C00899BF5 /* ProgressHUD.bundle in Resources */,
 				2D1012721B1347A3008F9198 /* LaunchScreen.xib in Resources */,
+				2D59587B1B15686B004AF8F1 /* BeiJing.gpx in Resources */,
 				2D10126F1B1347A3008F9198 /* Images.xcassets in Resources */,
 				2D74C9C91B136A7F00899BF5 /* LaunchImg@2x.png in Resources */,
 			);
@@ -408,6 +459,7 @@
 				2D74C9C41B135C5E00899BF5 /* main.m in Sources */,
 				2D74C9E01B136C6C00899BF5 /* ProgressHUD.m in Sources */,
 				2D74C9D11B136B4E00899BF5 /* FGHomeViewController.m in Sources */,
+				2DAC1FD61B1B5748005F60A1 /* FGJingDianViewController.m in Sources */,
 				2D74C9C21B135C5E00899BF5 /* AppDelegate.m in Sources */,
 				2D74C9D91B136C6300899BF5 /* NSString+Common.m in Sources */,
 			);
@@ -536,10 +588,18 @@
 			baseConfigurationReference = 63B6210BFD97BE4FEE85F8C9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FreeGuide/Class/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FreeGuide/Class/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sunflower",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -549,10 +609,18 @@
 			baseConfigurationReference = 161FEABC3F60DADFCFD959D4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FreeGuide/Class/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FreeGuide/Class/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sunflower",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

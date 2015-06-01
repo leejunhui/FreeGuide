@@ -28,7 +28,7 @@
 #import "UIImage+LJH.h"
 
 #define MAMapKey @"c766fa87ede2d62efd1045241b033b0f"
-
+#define IFlyMSCKey @"5564e28e"
 
 //取色
 #define LJHColor(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
