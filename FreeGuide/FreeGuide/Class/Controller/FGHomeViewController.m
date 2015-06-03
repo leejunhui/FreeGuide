@@ -38,6 +38,11 @@
     self.title = @"FreeGuide";
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)setupBeacon
 {
     self.locManager = [[CLLocationManager alloc] init];
@@ -97,10 +102,10 @@
         make.height.equalTo(@(44));
     }];
     
-    CGFloat bottomBtnW = kScreen_Width / 5;
-    int bottomBtnCount = 5;
-    NSArray *bottomBtnTitles = @[@"景区简介",@"景区导游",@"景区优惠",@"景区活动",@"健康生活"];
-    for (int index = 0; index < bottomBtnCount; index ++)
+    
+    NSArray *bottomBtnTitles = @[@"景区简介",@"景区导游",@"景区优惠",@"景区活动"];
+    CGFloat bottomBtnW = kScreen_Width / bottomBtnTitles.count;
+    for (int index = 0; index < bottomBtnTitles.count; index ++)
     {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
         
@@ -111,7 +116,14 @@
         btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
         btn.tag = index;
         [btn setTitleColor:LJHColor(102, 102, 102) forState:UIControlStateNormal];
-        [btn setTitle:bottomBtnTitles[index] forState:UIControlStateNormal];
+//        [btn setTitle:bottomBtnTitles[index] forState:UIControlStateNormal];
+        
+        NSString *imgName = [NSString stringWithFormat:@"bottom_button_%d",index + 1];
+        if ([UIImage imageNamed:imgName])
+        {
+            [btn setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        }
+        
         [btn.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [btn addTarget:self action:@selector(bottomBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [bottomBar addSubview:btn];
@@ -152,8 +164,6 @@
 {
 
 }
-
-
 
 #pragma mark <CLLocationManagerDelegate>
 
