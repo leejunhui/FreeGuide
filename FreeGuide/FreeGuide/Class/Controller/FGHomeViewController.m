@@ -7,15 +7,46 @@
 //
 
 #import "FGHomeViewController.h"
+#import "FGSearchViewController.h"
+#import "FGPersonalInfoViewController.h"
+#import "FGServiceViewController.h"
+#import "FGNaviViewController.h"
+#import "FGNearbyViewController.h"
+#import "FGOrderTicketViewController.h"
+#import "FGViewPointViewController.h"
+#import "FGVoiceGuideViewController.h"
+#import "FGToolBar.h"
+#import "FGSearchBar.h"
+#import "FGToolBarButtonModel.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreLocation/CoreLocation.h>
 #define kDefaultLocationZoomLevel 16.1
 #define UUID_PILOTBASE @"AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA"
-@interface FGHomeViewController ()<MAMapViewDelegate,CLLocationManagerDelegate>
+@interface FGHomeViewController ()<MAMapViewDelegate,CLLocationManagerDelegate,FGToolBarDelegate,FGSearchBarDelegate>
 @property (strong, nonatomic) MAMapView *mapView;
-@property (strong, nonatomic) CLLocationManager *locManager;
-@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
+@property (strong, nonatomic) FGToolBar *toolBar;
+@property (strong, nonatomic) FGSearchBar *searchBar;
+@property (strong, nonatomic) UIButton *gpsButton;
 
-@property (strong, nonatomic) UIButton *locateBtn;
+/**
+ *  语音导游
+ */
+@property (strong, nonatomic) UIButton *voiceGuideButton;
+
+/**
+ *  景点
+ */
+@property (strong, nonatomic) UIButton *jingDianButton;
+
+/**
+ *  购票
+ */
+@property (strong, nonatomic) UIButton *orderButton;
+
+
+@property (assign, nonatomic) BOOL isLocated;
+@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
+@property (strong, nonatomic) CLLocationManager *locManager;
 @end
 
 @implementation FGHomeViewController
@@ -25,148 +56,115 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupNav];
-    [self setupMap];
-    [self setupUI];
-    [self setupBeacon];
-    self.title = @"FreeGuide";
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    /**
+     *  隐藏掉导航栏
+     */
+    self.navigationController.navigationBarHidden = YES;
+    
+    [self setupSubViews];
+
+}
+
+- (void)setupSubViews
+{
+    [self.view addSubview:self.mapView];
+    [self.mapView addSubview:self.toolBar];
+    [self.mapView addSubview:self.searchBar];
+    [self.mapView addSubview:self.gpsButton];
+    [self.mapView addSubview:self.voiceGuideButton];
+    [self.mapView addSubview:self.jingDianButton];
+    [self.mapView addSubview:self.orderButton];
+    _mapView.delegate = self;
+    _toolBar.delegate = self;
+    _searchBar.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-}
-
-- (void)setupBeacon
-{
-    self.locManager = [[CLLocationManager alloc] init];
-    self.locManager.delegate = self;
-    // UUID_ESTIMOTE or UUID_HMSENSOR
-    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:UUID_PILOTBASE];
-//    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:@"UUID_PILOTBASE"];
-    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID major:10005 minor:10005
-                                                           identifier:@"UUID_PILOTBASE"];
     
-    [self.locManager requestAlwaysAuthorization];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
     
-    [self.locManager startMonitoringForRegion:self.beaconRegion];
-    [self.locManager startRangingBeaconsInRegion:(CLBeaconRegion *)self.beaconRegion];
-}
-
-
-
-- (void)setupNav
-{
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testAction)];
-}
-
-- (void)testAction
-{
-//    FGNotifyViewController *testVC = [[FGNotifyViewController alloc] init];
-//    [self.navigationController pushViewController:testVC animated:YES];
-}
-
-#pragma mark - 设置UI
-- (void)setupUI
-{
-    UIButton *locateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [locateBtn setImage:[UIImage imageNamed:@"icon_map_locate"] forState:UIControlStateNormal];
-    [locateBtn setBackgroundImage:[UIImage resizedImageWithName:@"mapTabButton"] forState:UIControlStateNormal];
-    [locateBtn setBackgroundImage:[UIImage resizedImageWithName:@"mapTabButtonSelected"] forState:UIControlStateSelected];
-    [locateBtn addTarget:self action:@selector(locateBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.mapView addSubview:locateBtn];
-    self.locateBtn = locateBtn;
+    self.mapView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
-    [locateBtn makeConstraints:^(MASConstraintMaker *make) {
+    [self.toolBar makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mapView.left).offset(10);
-        make.bottom.equalTo(self.mapView.bottom).offset(- 20);
-        make.height.equalTo(@(36));
-        make.width.equalTo(@(36));
-    }];
-    
-    
-    UIView *bottomBar = [[UIView alloc] init];
-    bottomBar.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:bottomBar];
-    
-    [bottomBar makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.left);
-        make.right.equalTo(self.view.right);
-        make.bottom.equalTo(self.view.bottom);
+        make.right.equalTo(self.mapView.right).offset(-10);
+        make.bottom.equalTo(self.mapView.bottom).offset(-10);
         make.height.equalTo(@(44));
     }];
     
+    [self.searchBar makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mapView.left).offset(10);
+        make.right.equalTo(self.mapView.right).offset(-10);
+        make.top.equalTo(self.mapView.top).offset(20);
+        make.height.equalTo(@(44));
+    }];
     
-    NSArray *bottomBtnTitles = @[@"景区简介",@"景区导游",@"景区优惠",@"景区活动"];
-    CGFloat bottomBtnW = kScreen_Width / bottomBtnTitles.count;
-    for (int index = 0; index < bottomBtnTitles.count; index ++)
-    {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-        
-        CGFloat btnW = bottomBtnW;
-        CGFloat btnH = 44;
-        CGFloat btnX = index * btnW;
-        CGFloat btnY = 0;
-        btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-        btn.tag = index;
-        [btn setTitleColor:LJHColor(102, 102, 102) forState:UIControlStateNormal];
-//        [btn setTitle:bottomBtnTitles[index] forState:UIControlStateNormal];
-        
-        NSString *imgName = [NSString stringWithFormat:@"bottom_button_%d",index + 1];
-        if ([UIImage imageNamed:imgName])
-        {
-            [btn setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
-        }
-        
-        [btn.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [btn addTarget:self action:@selector(bottomBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [bottomBar addSubview:btn];
-    }
+    [self.gpsButton makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mapView.left).offset(10);
+        make.bottom.equalTo(self.toolBar.top).offset(-10);
+    }];
+    
+    [self.voiceGuideButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchBar.bottom).offset(10);
+        make.right.equalTo(self.searchBar.right);
+    }];
+    
+    [self.jingDianButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.voiceGuideButton.bottom).offset(10);
+        make.right.equalTo(self.voiceGuideButton.right);
+    }];
+    
+    [self.orderButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.jingDianButton.bottom).offset(10);
+        make.right.equalTo(self.jingDianButton.right);
+    }];
 }
 
-- (void)bottomBtnClick:(UIButton *)btn
+- (void)viewDidLayoutSubviews
 {
-    LJHLog(@"%d",btn.tag);
-}
-
-
-- (void)locateBtnClick
-{
-    if (self.mapView.userTrackingMode != MAUserTrackingModeFollow)
-    {
-        self.mapView.userTrackingMode = MAUserTrackingModeFollow;
-        [self.mapView setZoomLevel:kDefaultLocationZoomLevel animated:YES];
-    }
-}
-
-#pragma mark - 设置地图
-- (void)setupMap
-{
-    self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 44)];
-    self.mapView.showsUserLocation = YES;
-    self.mapView.delegate = self;
-    self.mapView.zoomLevel = kDefaultLocationZoomLevel;
-    self.mapView.zoomEnabled = YES;
-    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
-    self.mapView.showsCompass = NO;
-    self.mapView.showsScale = NO;
-    [self.view addSubview:self.mapView];
+    [super viewDidLayoutSubviews];
 }
 
 #pragma mark - MAMapViewDelegate
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 {
-
+    if (userLocation.location)
+    {
+        [self handelMapLocateWithLocation:userLocation.location];
+        
+        
+    }
 }
 
-#pragma mark <CLLocationManagerDelegate>
+- (void)handelMapLocateWithLocation:(CLLocation *)location
+{
+    if (self.isLocated)
+    {
+    return;
+    }
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+    [self.mapView setCenterCoordinate:location.coordinate animated:YES];
+    [self.gpsButton setImage:[UIImage imageNamed:@"default_main_gpssearchbutton_image_normal"] forState:UIControlStateNormal];
+    [self.mapView setZoomLevel:kDefaultLocationZoomLevel atPivot:[self.mapView convertCoordinate:location.coordinate toPointToView:self.view] animated:YES];
+    self.isLocated = YES;
+}
 
+#pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"Entering %@", region.identifier);
@@ -190,7 +188,7 @@
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
     
     [self.locManager stopRangingBeaconsInRegion:(CLBeaconRegion *)region];
-
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
@@ -200,7 +198,7 @@
         NSString *tmpString = @"";
         for (CLBeacon *aBeacon in beacons)
         {
-//            self.uuidLabel.text = [aBeacon.proximityUUID UUIDString];
+            //            self.uuidLabel.text = [aBeacon.proximityUUID UUIDString];
             
             int major = [aBeacon.major intValue];
             int minor = [aBeacon.minor intValue];
@@ -224,30 +222,227 @@
             CLLocationAccuracy accuracy = aBeacon.accuracy;
             NSLog(@"%@", distance);
             tmpString = [tmpString stringByAppendingFormat:@"%15d%15d      %@  %f\n", major, minor, distance, accuracy];
-
-//            if (minor == 10002)
-//            {
-//                UILocalNotification *notification = [[UILocalNotification alloc] init];
-//                notification.alertBody = @"促销打折!";
-//                notification.soundName = @"Default";
-//                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-//            }
-//            else if (minor == 10003)
-//            {
-//                UILocalNotification *notification = [[UILocalNotification alloc] init];
-//                notification.alertBody = @"语音导游!";
-//                notification.soundName = @"Default";
-//                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-//            }
-//            else if (minor == 10004)
-//            {
-//                UILocalNotification *notification = [[UILocalNotification alloc] init];
-//                notification.alertBody = @"预订酒店!";
-//                notification.soundName = @"Default";
-//                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-//            }
+            
         }
-//        self.outputTextView.text = tmpString;
     }
 }
+
+
+#pragma mark - Custom Delegate
+#pragma mark - FGToolBarDelegate
+- (void)FGToolBar:(FGToolBar *)toolBar DidClickButton:(ToolBarButtonType)buttonType
+{
+    [self handelToolBarButtonWithButtonType:buttonType];
+}
+
+#pragma mark - FGSearchBarDelegate
+- (void)FGSearchBarDidBeginSearch
+{
+    [self.view endEditing:YES];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGSearchViewController alloc] init]] animated:YES completion:nil];
+}
+
+#pragma mark - event response
+/**
+ *  定位按钮事件
+ */
+- (void)gpsButtonClick
+{
+    if(self.mapView.userTrackingMode == MAUserTrackingModeNone || self.mapView.userTrackingMode == MAUserTrackingModeFollowWithHeading)
+    {
+        self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+        [self.gpsButton setImage:[UIImage imageNamed:@"default_main_gpssearchbutton_image_normal"] forState:UIControlStateNormal];
+        [self.mapView setZoomLevel:kDefaultLocationZoomLevel animated:YES];
+    }
+    else if (self.mapView.userTrackingMode == MAUserTrackingModeFollow)
+    {
+        self.mapView.userTrackingMode = MAUserTrackingModeFollowWithHeading;
+        [self.gpsButton setImage:[UIImage imageNamed:@"default_main_gpsrotatingbutton_image_normal"] forState:UIControlStateNormal];
+        [self.mapView setZoomLevel:kDefaultLocationZoomLevel animated:YES];
+    }
+}
+
+/**
+ *  语音导游事件
+ */
+- (void)voiceGuideButtonClick
+{
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGVoiceGuideViewController alloc] init]] animated:YES completion:nil];
+}
+
+/**
+ *  景点事件
+ */
+- (void)jingDianButtonClick
+{
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGViewPointViewController alloc] init]] animated:YES completion:nil];
+}
+
+/**
+ *  订票事件
+ */
+- (void)orderButtonClick
+{
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGOrderTicketViewController alloc] init]] animated:YES completion:nil];
+}
+
+#pragma mark - private methods
+/**
+ *  点击底部工具栏按钮
+ *
+ *  @param buttonType 按钮类型
+ */
+- (void)handelToolBarButtonWithButtonType:(ToolBarButtonType)buttonType
+{
+    
+    switch (buttonType)
+    {
+        case ToolBarButtonTypeNavi:
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGNaviViewController alloc] init]] animated:YES completion:nil];
+            break;
+        case ToolBarButtonTypeNear:
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGNearbyViewController alloc] init]] animated:YES completion:nil];
+            break;
+        case ToolBarButtonTypeService:
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGServiceViewController alloc] init]] animated:YES completion:nil];
+            break;
+        case ToolBarButtonTypePersonalInfo:
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGPersonalInfoViewController alloc] init]] animated:YES completion:nil];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - getters and setters
+
+- (MAMapView *)mapView
+{
+    if (!_mapView)
+    {
+        _mapView = [[MAMapView alloc] init];
+        _mapView.showsUserLocation = YES;
+        _mapView.delegate = self;
+        _mapView.zoomLevel = kDefaultLocationZoomLevel;
+        _mapView.zoomEnabled = YES;
+        _mapView.showsCompass = NO;
+        _mapView.showsScale = NO;
+    }
+    return _mapView;
+}
+
+- (FGToolBar *)toolBar
+{
+    if (!_toolBar)
+    {
+        NSMutableArray *models = [NSMutableArray array];
+        NSArray *titles = @[@"导航",@"附近",@"服务",@"个人"];
+        for (int index = 0; index < titles.count; index ++)
+        {
+            NSString *imageName = [NSString stringWithFormat:@"bottom_button_%d",index + 1];
+            UIImage *image = [UIImage imageNamed:imageName];
+            if (image)
+            {
+                FGToolBarButtonModel *model = [[FGToolBarButtonModel alloc] initWithTitle:titles[index] Image:image];
+                [models addObject:model];
+            }
+            else
+            {
+                NSAssert(!image, @"图片资源未能正确加载!");
+            }
+        }
+        
+        _toolBar = [[FGToolBar alloc] initWithButtonModels:models];
+    }
+    return _toolBar;
+}
+
+- (FGSearchBar *)searchBar
+{
+    if (!_searchBar)
+    {
+        _searchBar = [[FGSearchBar alloc] init];
+        
+    }
+    return _searchBar;
+}
+
+- (UIButton *)gpsButton
+{
+    if (!_gpsButton)
+    {
+        _gpsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_gpsButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_gpsButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        [_gpsButton setImage:[UIImage imageNamed:@"default_main_gpsnormalbutton_image_normal"] forState:UIControlStateNormal];
+        [_gpsButton addTarget:self action:@selector(gpsButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _gpsButton;
+}
+
+- (UIButton *)voiceGuideButton
+{
+    if (!_voiceGuideButton)
+    {
+        _voiceGuideButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_voiceGuideButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_voiceGuideButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        [_voiceGuideButton setImage:[UIImage imageNamed:@"voiceGuide"] forState:UIControlStateNormal];
+        [_voiceGuideButton addTarget:self action:@selector(voiceGuideButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _voiceGuideButton;
+}
+
+- (UIButton *)jingDianButton
+{
+    if (!_jingDianButton)
+    {
+        _jingDianButton = [UIButton buttonWithType:UIButtonTypeCustom];
+
+        [_jingDianButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_jingDianButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        [_jingDianButton setImage:[UIImage imageNamed:@"scenary"] forState:UIControlStateNormal];
+        [_jingDianButton addTarget:self action:@selector(jingDianButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _jingDianButton;
+}
+
+- (UIButton *)orderButton
+{
+    if (!_orderButton)
+    {
+        _orderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_orderButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_orderButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        [_orderButton setImage:[UIImage imageNamed:@"order"] forState:UIControlStateNormal];
+        [_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _orderButton;
+}
+
+
+- (void)setupBeacon
+{
+    self.locManager = [[CLLocationManager alloc] init];
+    self.locManager.delegate = self;
+    // UUID_ESTIMOTE or UUID_HMSENSOR
+    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:UUID_PILOTBASE];
+//    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:@"UUID_PILOTBASE"];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID major:10005 minor:10005
+                                                           identifier:@"UUID_PILOTBASE"];
+    
+    [self.locManager requestAlwaysAuthorization];
+    
+    [self.locManager startMonitoringForRegion:self.beaconRegion];
+    [self.locManager startRangingBeaconsInRegion:(CLBeaconRegion *)self.beaconRegion];
+}
+
+
+- (void)dealloc
+{
+    self.toolBar.delegate = nil;
+    self.searchBar.delegate = nil;
+}
+
+
 @end

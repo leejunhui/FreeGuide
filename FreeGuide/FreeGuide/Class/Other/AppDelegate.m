@@ -25,19 +25,12 @@
         
     }
     
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:253.0/255.0 green:0/255.0 blue:50.0/255.0 alpha:1]];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"Futura" size:18],
-                                  NSForegroundColorAttributeName: [UIColor whiteColor]};
-    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+    //向服务器发请求，获取定位到的景点的ibeacons列表数据
+    //[uuid major minor]数组
+    [self setupBeacons];
     
     [self setupMap];
     [self setupIFlyMSC];
@@ -58,6 +51,21 @@
         
     }
     return YES;
+}
+
+- (void)setupBeacons
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager managerForDomain:@"www.apple.com.cn"];
+    [manager startMonitoring];
+    if (manager.reachable == NO)
+    {
+        //无网络情况下从本地加载beacons
+        
+    }
+    else
+    {
+    
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

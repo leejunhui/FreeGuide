@@ -26,6 +26,7 @@
 #import "ProgressHUD.h"
 #import "NSString+Common.h"
 #import "UIImage+LJH.h"
+#import "UIBarButtonItem+LJH.h"
 
 #define MAMapKey @"c766fa87ede2d62efd1045241b033b0f"
 #define IFlyMSCKey @"5564e28e"

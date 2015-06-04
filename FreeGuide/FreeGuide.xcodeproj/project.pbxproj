@@ -28,6 +28,18 @@
 		2D74C9E01B136C6C00899BF5 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */; };
 		2D74C9E21B136FD300899BF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E11B136FD300899BF5 /* CoreLocation.framework */; };
 		2D74C9E41B136FDA00899BF5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */; };
+		2D8CD3081B2014FF00E68470 /* FGToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3071B2014FF00E68470 /* FGToolBar.m */; };
+		2D8CD30B1B201DB500E68470 /* FGToolBarButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD30A1B201DB500E68470 /* FGToolBarButtonModel.m */; };
+		2D8CD30F1B2032BF00E68470 /* FGSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD30E1B2032BF00E68470 /* FGSearchBar.m */; };
+		2D8CD3131B20403B00E68470 /* FGSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3121B20403B00E68470 /* FGSearchViewController.m */; };
+		2D8CD3481B207A4200E68470 /* UIBarButtonItem+LJH.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3471B207A4200E68470 /* UIBarButtonItem+LJH.m */; };
+		2D8CD34C1B20885300E68470 /* FGPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD34B1B20885300E68470 /* FGPersonalInfoViewController.m */; };
+		2D8CD3501B208D4A00E68470 /* FGServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD34F1B208D4A00E68470 /* FGServiceViewController.m */; };
+		2D8CD3541B20A91300E68470 /* FGNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3531B20A91300E68470 /* FGNaviViewController.m */; };
+		2D8CD3581B20AA9100E68470 /* FGNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3571B20AA9100E68470 /* FGNearbyViewController.m */; };
+		2D8CD35E1B20AB2600E68470 /* FGVoiceGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD35D1B20AB2600E68470 /* FGVoiceGuideViewController.m */; };
+		2D8CD3611B20AB3500E68470 /* FGViewPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3601B20AB3500E68470 /* FGViewPointViewController.m */; };
+		2D8CD3641B20AB4200E68470 /* FGOrderTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD3631B20AB4200E68470 /* FGOrderTicketViewController.m */; };
 		2DAC1FD61B1B5748005F60A1 /* FGJingDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC1FD41B1B5748005F60A1 /* FGJingDianViewController.m */; };
 		2DBADC921B15764A00471403 /* libSunFlower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBADC911B15764A00471403 /* libSunFlower.a */; };
 /* End PBXBuildFile section */
@@ -76,6 +88,30 @@
 		2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		2D74C9E11B136FD300899BF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2D74C9E31B136FDA00899BF5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		2D8CD3061B2014FF00E68470 /* FGToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGToolBar.h; sourceTree = "<group>"; };
+		2D8CD3071B2014FF00E68470 /* FGToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGToolBar.m; sourceTree = "<group>"; };
+		2D8CD3091B201DB500E68470 /* FGToolBarButtonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGToolBarButtonModel.h; sourceTree = "<group>"; };
+		2D8CD30A1B201DB500E68470 /* FGToolBarButtonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGToolBarButtonModel.m; sourceTree = "<group>"; };
+		2D8CD30D1B2032BF00E68470 /* FGSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGSearchBar.h; sourceTree = "<group>"; };
+		2D8CD30E1B2032BF00E68470 /* FGSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGSearchBar.m; sourceTree = "<group>"; };
+		2D8CD3111B20403B00E68470 /* FGSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGSearchViewController.h; sourceTree = "<group>"; };
+		2D8CD3121B20403B00E68470 /* FGSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGSearchViewController.m; sourceTree = "<group>"; };
+		2D8CD3461B207A4200E68470 /* UIBarButtonItem+LJH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+LJH.h"; sourceTree = "<group>"; };
+		2D8CD3471B207A4200E68470 /* UIBarButtonItem+LJH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+LJH.m"; sourceTree = "<group>"; };
+		2D8CD34A1B20885300E68470 /* FGPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGPersonalInfoViewController.h; sourceTree = "<group>"; };
+		2D8CD34B1B20885300E68470 /* FGPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGPersonalInfoViewController.m; sourceTree = "<group>"; };
+		2D8CD34E1B208D4A00E68470 /* FGServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGServiceViewController.h; sourceTree = "<group>"; };
+		2D8CD34F1B208D4A00E68470 /* FGServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGServiceViewController.m; sourceTree = "<group>"; };
+		2D8CD3521B20A91300E68470 /* FGNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGNaviViewController.h; sourceTree = "<group>"; };
+		2D8CD3531B20A91300E68470 /* FGNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGNaviViewController.m; sourceTree = "<group>"; };
+		2D8CD3561B20AA9100E68470 /* FGNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGNearbyViewController.h; sourceTree = "<group>"; };
+		2D8CD3571B20AA9100E68470 /* FGNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGNearbyViewController.m; sourceTree = "<group>"; };
+		2D8CD35C1B20AB2600E68470 /* FGVoiceGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGVoiceGuideViewController.h; sourceTree = "<group>"; };
+		2D8CD35D1B20AB2600E68470 /* FGVoiceGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGVoiceGuideViewController.m; sourceTree = "<group>"; };
+		2D8CD35F1B20AB3500E68470 /* FGViewPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGViewPointViewController.h; sourceTree = "<group>"; };
+		2D8CD3601B20AB3500E68470 /* FGViewPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGViewPointViewController.m; sourceTree = "<group>"; };
+		2D8CD3621B20AB4200E68470 /* FGOrderTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOrderTicketViewController.h; sourceTree = "<group>"; };
+		2D8CD3631B20AB4200E68470 /* FGOrderTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGOrderTicketViewController.m; sourceTree = "<group>"; };
 		2DAC1FD31B1B5748005F60A1 /* FGJingDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGJingDianViewController.h; sourceTree = "<group>"; };
 		2DAC1FD41B1B5748005F60A1 /* FGJingDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGJingDianViewController.m; sourceTree = "<group>"; };
 		2DBADC901B15764A00471403 /* IFlyFlowerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyFlowerCollector.h; sourceTree = "<group>"; };
@@ -192,6 +228,14 @@
 		2D74C9BA1B135C5E00899BF5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2D8CD35B1B20AB1400E68470 /* OrderTicket */,
+				2D8CD35A1B20AB0B00E68470 /* ViewPoint */,
+				2D8CD3591B20AAFD00E68470 /* VoiceGuide */,
+				2D8CD3551B20AA8400E68470 /* NearBy */,
+				2D8CD3511B20A90300E68470 /* Navi */,
+				2D8CD34D1B208D3A00E68470 /* Service */,
+				2D8CD3491B20884100E68470 /* Personal */,
+				2D8CD3101B203FCA00E68470 /* Search */,
 				2D5958881B15702E004AF8F1 /* Notify */,
 				2D74C9CE1B136B4000899BF5 /* Home */,
 				2D74C9CD1B136B3700899BF5 /* Base */,
@@ -202,6 +246,9 @@
 		2D74C9BB1B135C5E00899BF5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2D8CD3651B20AC9500E68470 /* beacon */,
+				2D8CD3091B201DB500E68470 /* FGToolBarButtonModel.h */,
+				2D8CD30A1B201DB500E68470 /* FGToolBarButtonModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +271,8 @@
 		2D74C9C11B135C5E00899BF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2D8CD30C1B2032AF00E68470 /* TopSearchBar */,
+				2D8CD3051B2014E600E68470 /* BottomToolBar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,6 +298,8 @@
 		2D74C9D21B136C4F00899BF5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2D8CD3461B207A4200E68470 /* UIBarButtonItem+LJH.h */,
+				2D8CD3471B207A4200E68470 /* UIBarButtonItem+LJH.m */,
 				2D74C9D51B136C6300899BF5 /* NSString+Common.h */,
 				2D74C9D61B136C6300899BF5 /* NSString+Common.m */,
 				2D74C9D71B136C6300899BF5 /* UIImage+LJH.h */,
@@ -280,6 +331,103 @@
 				2D74C9DE1B136C6C00899BF5 /* ProgressHUD.m */,
 			);
 			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		2D8CD3051B2014E600E68470 /* BottomToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD3061B2014FF00E68470 /* FGToolBar.h */,
+				2D8CD3071B2014FF00E68470 /* FGToolBar.m */,
+			);
+			name = BottomToolBar;
+			sourceTree = "<group>";
+		};
+		2D8CD30C1B2032AF00E68470 /* TopSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD30D1B2032BF00E68470 /* FGSearchBar.h */,
+				2D8CD30E1B2032BF00E68470 /* FGSearchBar.m */,
+			);
+			name = TopSearchBar;
+			sourceTree = "<group>";
+		};
+		2D8CD3101B203FCA00E68470 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD3111B20403B00E68470 /* FGSearchViewController.h */,
+				2D8CD3121B20403B00E68470 /* FGSearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		2D8CD3491B20884100E68470 /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD34A1B20885300E68470 /* FGPersonalInfoViewController.h */,
+				2D8CD34B1B20885300E68470 /* FGPersonalInfoViewController.m */,
+			);
+			name = Personal;
+			sourceTree = "<group>";
+		};
+		2D8CD34D1B208D3A00E68470 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD34E1B208D4A00E68470 /* FGServiceViewController.h */,
+				2D8CD34F1B208D4A00E68470 /* FGServiceViewController.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		2D8CD3511B20A90300E68470 /* Navi */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD3521B20A91300E68470 /* FGNaviViewController.h */,
+				2D8CD3531B20A91300E68470 /* FGNaviViewController.m */,
+			);
+			name = Navi;
+			sourceTree = "<group>";
+		};
+		2D8CD3551B20AA8400E68470 /* NearBy */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD3561B20AA9100E68470 /* FGNearbyViewController.h */,
+				2D8CD3571B20AA9100E68470 /* FGNearbyViewController.m */,
+			);
+			name = NearBy;
+			sourceTree = "<group>";
+		};
+		2D8CD3591B20AAFD00E68470 /* VoiceGuide */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD35C1B20AB2600E68470 /* FGVoiceGuideViewController.h */,
+				2D8CD35D1B20AB2600E68470 /* FGVoiceGuideViewController.m */,
+			);
+			name = VoiceGuide;
+			sourceTree = "<group>";
+		};
+		2D8CD35A1B20AB0B00E68470 /* ViewPoint */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD35F1B20AB3500E68470 /* FGViewPointViewController.h */,
+				2D8CD3601B20AB3500E68470 /* FGViewPointViewController.m */,
+			);
+			name = ViewPoint;
+			sourceTree = "<group>";
+		};
+		2D8CD35B1B20AB1400E68470 /* OrderTicket */ = {
+			isa = PBXGroup;
+			children = (
+				2D8CD3621B20AB4200E68470 /* FGOrderTicketViewController.h */,
+				2D8CD3631B20AB4200E68470 /* FGOrderTicketViewController.m */,
+			);
+			name = OrderTicket;
+			sourceTree = "<group>";
+		};
+		2D8CD3651B20AC9500E68470 /* beacon */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = beacon;
 			sourceTree = "<group>";
 		};
 		2DBADC8F1B15764900471403 /* sunflower */ = {
@@ -454,14 +602,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D8CD3611B20AB3500E68470 /* FGViewPointViewController.m in Sources */,
+				2D8CD3581B20AA9100E68470 /* FGNearbyViewController.m in Sources */,
 				2D74C9DA1B136C6300899BF5 /* UIImage+LJH.m in Sources */,
+				2D8CD3131B20403B00E68470 /* FGSearchViewController.m in Sources */,
 				2D74C9CC1B136B2000899BF5 /* FGBaseViewController.m in Sources */,
 				2D74C9C41B135C5E00899BF5 /* main.m in Sources */,
+				2D8CD35E1B20AB2600E68470 /* FGVoiceGuideViewController.m in Sources */,
 				2D74C9E01B136C6C00899BF5 /* ProgressHUD.m in Sources */,
+				2D8CD3501B208D4A00E68470 /* FGServiceViewController.m in Sources */,
 				2D74C9D11B136B4E00899BF5 /* FGHomeViewController.m in Sources */,
+				2D8CD3081B2014FF00E68470 /* FGToolBar.m in Sources */,
+				2D8CD3481B207A4200E68470 /* UIBarButtonItem+LJH.m in Sources */,
+				2D8CD3641B20AB4200E68470 /* FGOrderTicketViewController.m in Sources */,
 				2DAC1FD61B1B5748005F60A1 /* FGJingDianViewController.m in Sources */,
 				2D74C9C21B135C5E00899BF5 /* AppDelegate.m in Sources */,
+				2D8CD3541B20A91300E68470 /* FGNaviViewController.m in Sources */,
+				2D8CD30B1B201DB500E68470 /* FGToolBarButtonModel.m in Sources */,
+				2D8CD30F1B2032BF00E68470 /* FGSearchBar.m in Sources */,
 				2D74C9D91B136C6300899BF5 /* NSString+Common.m in Sources */,
+				2D8CD34C1B20885300E68470 /* FGPersonalInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
