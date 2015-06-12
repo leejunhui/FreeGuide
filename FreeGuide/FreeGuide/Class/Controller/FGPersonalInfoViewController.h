@@ -8,6 +8,6 @@
 
 #import "FGBaseViewController.h"
 
-@interface FGPersonalInfoViewController : FGBaseViewController
+@interface FGPersonalInfoViewController : FGBaseViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, QBImagePickerControllerDelegate>
 
 @end

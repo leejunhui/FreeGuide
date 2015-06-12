@@ -15,15 +15,27 @@
 #import "FGOrderTicketViewController.h"
 #import "FGViewPointViewController.h"
 #import "FGVoiceGuideViewController.h"
+#import "FGViewPointInfoViewController.h"
 #import "FGToolBar.h"
 #import "FGSearchBar.h"
 #import "FGToolBarButtonModel.h"
+#import "FGViewPointAnnotation.h"
+#import "FGWCAnnotation.h"
+#import "FGATMAnnotation.h"
+#import "FGViewPoint.h"
+#import "FGWC.h"
+#import "FGATM.h"
+#import "FGViewPointAnnotationView.h"
+#import "FGWCAnnotationView.h"
+#import "FGWTMAnnotationView.h"
+#import "FGViewPointCallOutView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
-#define kDefaultLocationZoomLevel 16.1
+
 #define UUID_PILOTBASE @"AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA"
-@interface FGHomeViewController ()<MAMapViewDelegate,CLLocationManagerDelegate,FGToolBarDelegate,FGSearchBarDelegate>
+@interface FGHomeViewController ()<MAMapViewDelegate,CLLocationManagerDelegate,FGToolBarDelegate,FGSearchBarDelegate,AMapSearchDelegate>
 @property (strong, nonatomic) MAMapView *mapView;
+@property (strong, nonatomic) AMapSearchAPI *searchApi;
 @property (strong, nonatomic) FGToolBar *toolBar;
 @property (strong, nonatomic) FGSearchBar *searchBar;
 @property (strong, nonatomic) UIButton *gpsButton;
@@ -43,10 +55,20 @@
  */
 @property (strong, nonatomic) UIButton *orderButton;
 
+/**
+ *  卫生间
+ */
+@property (strong, nonatomic) UIButton *wcButton;
+
+@property (strong, nonatomic) UIButton *atmButton;
+
 
 @property (assign, nonatomic) BOOL isLocated;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locManager;
+@property (strong, nonatomic) CLLocation *currentLocation;
+@property (copy, nonatomic) NSString *currentCity;
+@property (strong, nonatomic) NSMutableArray *annotations;
 @end
 
 @implementation FGHomeViewController
@@ -56,7 +78,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidLoad
@@ -65,13 +87,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    /**
-     *  隐藏掉导航栏
-     */
-    self.navigationController.navigationBarHidden = YES;
     
+    [self setupBeacon];
     [self setupSubViews];
-
 }
 
 - (void)setupSubViews
@@ -83,10 +101,13 @@
     [self.mapView addSubview:self.voiceGuideButton];
     [self.mapView addSubview:self.jingDianButton];
     [self.mapView addSubview:self.orderButton];
+    [self.mapView addSubview:self.wcButton];
+    [self.mapView addSubview:self.atmButton];
     _mapView.delegate = self;
     _toolBar.delegate = self;
     _searchBar.delegate = self;
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -133,6 +154,16 @@
         make.top.equalTo(self.jingDianButton.bottom).offset(10);
         make.right.equalTo(self.jingDianButton.right);
     }];
+    
+    [self.wcButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.orderButton.bottom).offset(10);
+        make.right.equalTo(self.orderButton.right);
+    }];
+    
+    [self.atmButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.wcButton.bottom).offset(10);
+        make.right.equalTo(self.wcButton.right);
+    }];
 }
 
 - (void)viewDidLayoutSubviews
@@ -151,17 +182,126 @@
     }
 }
 
+
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[FGViewPointAnnotation class]])
+    {
+        static NSString *reuseIndetifier = @"ViewPointannotationReuseIndetifier";
+        FGViewPointAnnotationView *annotationView = (FGViewPointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        if (annotationView == nil) {
+            annotationView = [[FGViewPointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
+        }
+
+        // 设置为 NO,用以调用自定义的calloutView
+        annotationView.canShowCallout = NO;
+        //设置中心心点偏移,使得标注底部中间点成为经纬度对应点
+        annotationView.centerOffset = CGPointMake(0, - 25);
+        
+        annotationView.image = [UIImage imageNamed:@"map_annotation"];
+        
+        annotationView.goToDetail = ^(FGViewPoint *viewPoint)
+        {
+            FGViewPointInfoViewController *infoVC = [[FGViewPointInfoViewController alloc] init];
+            infoVC.viewPoint = viewPoint;
+            infoVC.title = viewPoint.title;
+            [self.navigationController pushViewController:infoVC animated:YES];
+        };
+        return annotationView;
+    }
+    else if ([annotation isKindOfClass:[FGWCAnnotation class]])
+    {
+        static NSString *reuseIndetifier = @"WCannotationReuseIndetifier";
+        FGWCAnnotationView *annotationView = (FGWCAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        if (annotationView == nil) {
+            annotationView = [[FGWCAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
+        }
+        
+        // 设置为 NO,用以调用自定义的calloutView
+        annotationView.canShowCallout = YES;
+        //设置中心心点偏移,使得标注底部中间点成为经纬度对应点
+        annotationView.centerOffset = CGPointMake(0, - 25);
+        
+        annotationView.image = [UIImage imageNamed:@"default_navi_toilet_normal"];
+        
+//        annotationView.goToDetail = ^(FGViewPoint *viewPoint)
+//        {
+//            FGViewPointInfoViewController *infoVC = [[FGViewPointInfoViewController alloc] init];
+//            infoVC.viewPoint = viewPoint;
+//            infoVC.title = viewPoint.title;
+//            [self.navigationController pushViewController:infoVC animated:YES];
+//        };
+        return annotationView;
+    }
+    else if ([annotation isKindOfClass:[FGATMAnnotation class]])
+    {
+        static NSString *reuseIndetifier = @"ATMannotationReuseIndetifier";
+        FGWTMAnnotationView *annotationView = (FGWTMAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        if (annotationView == nil) {
+            annotationView = [[FGWTMAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
+        }
+        
+        // 设置为 NO,用以调用自定义的calloutView
+        annotationView.canShowCallout = YES;
+        //设置中心心点偏移,使得标注底部中间点成为经纬度对应点
+        annotationView.centerOffset = CGPointMake(0, - 25);
+        
+        annotationView.image = [UIImage imageNamed:@"default_navi_atm_normal"];
+        
+//        annotationView.goToDetail = ^(FGViewPoint *viewPoint)
+//        {
+//            FGViewPointInfoViewController *infoVC = [[FGViewPointInfoViewController alloc] init];
+//            infoVC.viewPoint = viewPoint;
+//            infoVC.title = viewPoint.title;
+//            [self.navigationController pushViewController:infoVC animated:YES];
+//        };
+        return annotationView;
+    }
+    return nil;
+}
+
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
+{
+    NSLog(@"%f %f",view.annotation.coordinate.longitude, view.annotation.coordinate.latitude);
+    
+    [mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
+    CGPoint point = [mapView convertCoordinate:view.annotation.coordinate toPointToView:mapView];
+    [mapView setZoomLevel:16.1 atPivot:point animated:YES];
+}
+
 - (void)handelMapLocateWithLocation:(CLLocation *)location
 {
     if (self.isLocated)
     {
     return;
     }
+    self.currentLocation = location;
     self.mapView.userTrackingMode = MAUserTrackingModeFollow;
     [self.mapView setCenterCoordinate:location.coordinate animated:YES];
     [self.gpsButton setImage:[UIImage imageNamed:@"default_main_gpssearchbutton_image_normal"] forState:UIControlStateNormal];
     [self.mapView setZoomLevel:kDefaultLocationZoomLevel atPivot:[self.mapView convertCoordinate:location.coordinate toPointToView:self.view] animated:YES];
+    
+    AMapReGeocodeSearchRequest *request = [[AMapReGeocodeSearchRequest alloc] init];
+    request.searchType = AMapSearchType_ReGeocode;
+    AMapGeoPoint *point = [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    request.location = point;
+    request.radius = 10000;
+    request.requireExtension = YES;
+    
+    [self.searchApi AMapReGoecodeSearch:request];
+    
     self.isLocated = YES;
+}
+
+#pragma mark - AMapSearchDelegate
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if(response.regeocode != nil)
+    {
+        //处理搜索结果
+        NSString *result = [NSString stringWithFormat:@"%@",[response.regeocode addressComponent].city];
+        self.currentCity = result;
+    }
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -274,8 +414,34 @@
  *  景点事件
  */
 - (void)jingDianButtonClick
-{
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGViewPointViewController alloc] init]] animated:YES completion:nil];
+{    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"ViewPointData" ofType:@"plist"];
+    NSArray *data = [NSArray arrayWithContentsOfFile:path];
+    NSArray *tempArray = [NSArray array];
+    tempArray = [FGViewPoint objectArrayWithKeyValuesArray:data];
+    
+    NSMutableArray *tempAnnotations = [NSMutableArray array];
+    for (FGViewPoint *point in tempArray)
+    {
+        FGViewPointAnnotation *annotation = [[FGViewPointAnnotation alloc] init];
+        annotation.viewPoint = point;
+        [tempAnnotations addObject:annotation];
+    }
+
+    [self.mapView removeAnnotations:self.annotations];
+    [self.annotations removeAllObjects];
+    for (int index = 0; index < tempArray.count ; index ++)
+    {
+        FGViewPoint *viewPoint = tempArray[index];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(viewPoint.latitude, viewPoint.longitude);
+        FGViewPointAnnotation *annotation = [[FGViewPointAnnotation alloc] init];
+        annotation.coordinate = coordinate;
+        annotation.viewPoint = viewPoint;
+        [self.annotations addObject:annotation];
+        
+    }
+    [self.mapView addAnnotations:self.annotations];
+    [self.mapView showAnnotations:self.annotations animated:YES];
 }
 
 /**
@@ -283,7 +449,70 @@
  */
 - (void)orderButtonClick
 {
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGOrderTicketViewController alloc] init]] animated:YES completion:nil];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = @"青城山欢迎您!";
+    notification.alertAction = @"打开FreeGuide";
+    notification.soundName = @"Default";
+    notification.userInfo = @{@"key":@"1",
+                              @"title":@"青城山欢迎您",
+                              @"body":@"青城山，全球道教主流教派全真道圣地，世界文化遗产，世界自然遗产（四川大熊猫栖息地），中国四大道教名山之一，全国重点文物保护单位，国家重点风景名胜区，国家AAAAA级旅游景区。青城山位于成都市都江堰市西南，东距成都市区68公里，处于都江堰水利工程西南10公里处。主峰老君阁海拔1260米。青城山群峰环绕起伏、林木葱茏幽翠，享有“青城天下幽”的美誉。青城山历史悠久，是中国道教发祥地之一，是全国道教十大洞天的第五洞天。青城山名胜古迹很多 ，古建筑各具特色，古今名人诗画词赋处处可见，有优美的风光和神奇的传说。全山宫观以天师洞为核心，建有建福宫、上清宫、祖师殿、圆明宫、玉清宫、朝阳洞等。青城山自古是文人墨客探幽访胜和隐居修练之地，古称“洞天福地”、“神仙都会”。青城山在历史上名称很多，曾叫“汶山”、“天谷山”、渎山、丈人山、赤城山、清城都、天国山等名。青城山被誉为“天下第五名山”。"};
+    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.applicationIconBadgeNumber++;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+- (void)wcButtonClick
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"WC" ofType:@"plist"];
+    NSArray *data = [NSArray arrayWithContentsOfFile:path];
+    NSArray *tempArray = [NSArray array];
+    tempArray = [FGWC objectArrayWithKeyValuesArray:data];
+    
+    
+    [self.mapView removeAnnotations:self.annotations];
+    [self.annotations removeAllObjects];
+    for (int index = 0; index < tempArray.count ; index ++)
+    {
+        FGWC *wc = tempArray[index];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(wc.latitude, wc.longitude);
+
+        FGWCAnnotation *annotation = [[FGWCAnnotation alloc] init];
+        annotation.coordinate = coordinate;
+        annotation.wc = wc;
+        annotation.title = @"卫生间";
+        [self.annotations addObject:annotation];
+        
+    }
+    [self.mapView addAnnotations:self.annotations];
+    [self.mapView showAnnotations:self.annotations animated:YES];
+
+}
+
+- (void)atmButtonClick
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"ATM" ofType:@"plist"];
+    NSArray *data = [NSArray arrayWithContentsOfFile:path];
+    NSArray *tempArray = [NSArray array];
+    tempArray = [FGATM objectArrayWithKeyValuesArray:data];
+    
+    
+    [self.mapView removeAnnotations:self.annotations];
+    [self.annotations removeAllObjects];
+    for (int index = 0; index < tempArray.count ; index ++)
+    {
+        FGATM *atm = tempArray[index];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(atm.latitude, atm.longitude);
+        
+        FGATMAnnotation *annotation = [[FGATMAnnotation alloc] init];
+        annotation.coordinate = coordinate;
+        annotation.atm = atm;
+        annotation.title = atm.title;
+        [self.annotations addObject:annotation];
+        
+    }
+    [self.mapView addAnnotations:self.annotations];
+    [self.mapView showAnnotations:self.annotations animated:YES];
 }
 
 #pragma mark - private methods
@@ -298,7 +527,7 @@
     switch (buttonType)
     {
         case ToolBarButtonTypeNavi:
-            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGNaviViewController alloc] init]] animated:YES completion:nil];
+            [self presentVC];
             break;
         case ToolBarButtonTypeNear:
             [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[FGNearbyViewController alloc] init]] animated:YES completion:nil];
@@ -312,6 +541,13 @@
         default:
             break;
     }
+}
+
+- (void)presentVC
+{
+    FGNaviViewController *vc = [[FGNaviViewController alloc] init];
+    vc.currentCity = self.currentCity;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES completion:nil];
 }
 
 #pragma mark - getters and setters
@@ -387,7 +623,9 @@
         _voiceGuideButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_voiceGuideButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
         [_voiceGuideButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
-        [_voiceGuideButton setImage:[UIImage imageNamed:@"voiceGuide"] forState:UIControlStateNormal];
+        _voiceGuideButton.layer.masksToBounds = YES;
+        _voiceGuideButton.layer.cornerRadius = _voiceGuideButton.currentBackgroundImage.size.width / 2;
+        [_voiceGuideButton setImage:[UIImage imageNamed:@"default_mine_navi_voice_normal"] forState:UIControlStateNormal];
         [_voiceGuideButton addTarget:self action:@selector(voiceGuideButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _voiceGuideButton;
@@ -401,7 +639,9 @@
 
         [_jingDianButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
         [_jingDianButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
-        [_jingDianButton setImage:[UIImage imageNamed:@"scenary"] forState:UIControlStateNormal];
+        _jingDianButton.layer.masksToBounds = YES;
+        _jingDianButton.layer.cornerRadius = _jingDianButton.currentBackgroundImage.size.width / 2;
+        [_jingDianButton setImage:[UIImage imageNamed:@"问询处"] forState:UIControlStateNormal];
         [_jingDianButton addTarget:self action:@selector(jingDianButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _jingDianButton;
@@ -414,12 +654,70 @@
         _orderButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_orderButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
         [_orderButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
-        [_orderButton setImage:[UIImage imageNamed:@"order"] forState:UIControlStateNormal];
+        _orderButton.layer.masksToBounds = YES;
+        _orderButton.layer.cornerRadius = _orderButton.currentBackgroundImage.size.width / 2;
+        [_orderButton setImage:[UIImage imageNamed:@"OrderTicket"] forState:UIControlStateNormal];
         [_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _orderButton;
 }
 
+- (UIButton *)wcButton
+{
+    if (!_wcButton)
+    {
+        _wcButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_wcButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_wcButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        _wcButton.layer.masksToBounds = YES;
+        _wcButton.layer.cornerRadius = _wcButton.currentBackgroundImage.size.width / 2;
+        [_wcButton setImage:[UIImage imageNamed:@"WC"] forState:UIControlStateNormal];
+        [_wcButton addTarget:self action:@selector(wcButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _wcButton;
+}
+
+- (UIButton *)atmButton
+{
+    if (!_atmButton)
+    {
+        _atmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_atmButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_normal"] forState:UIControlStateNormal];
+        [_atmButton setBackgroundImage:[UIImage imageNamed:@"default_main_gpsbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        _atmButton.layer.masksToBounds = YES;
+        _atmButton.layer.cornerRadius = _atmButton.currentBackgroundImage.size.width / 2;
+        [_atmButton setImage:[UIImage imageNamed:@"ATM"] forState:UIControlStateNormal];
+        [_atmButton addTarget:self action:@selector(atmButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _atmButton;
+}
+
+- (AMapSearchAPI *)searchApi
+{
+    if (!_searchApi)
+    {
+        _searchApi = [[AMapSearchAPI alloc] initWithSearchKey:MAMapKey Delegate:self];
+    }
+    return _searchApi;
+}
+
+- (CLLocation *)currentLocation
+{
+    if (_currentLocation)
+    {
+        _currentLocation = [[CLLocation alloc] init];
+    }
+    return _currentLocation;
+}
+
+- (NSMutableArray *)annotations
+{
+    if (!_annotations)
+    {
+        _annotations = [NSMutableArray array];
+    }
+    return _annotations;
+}
 
 - (void)setupBeacon
 {

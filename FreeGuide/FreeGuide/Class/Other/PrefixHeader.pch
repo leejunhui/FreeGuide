@@ -17,16 +17,24 @@
 #import <AFNetworking.h>
 #import <Masonry.h>
 #import <MAMapKit/MAMapKit.h>
+#import <AMapSearchAPI.h>
 #import <FMDB.h>
 #import <MJExtension.h>
 #import <MJRefresh.h>
 #import <IQKeyboardManager.h>
 #import <JDStatusBarNotification.h>
 #import <UIImageView+WebCache.h>
+#import <CoreLocation/CoreLocation.h>
+#import "QBImagePickerController.h"
 #import "ProgressHUD.h"
 #import "NSString+Common.h"
 #import "UIImage+LJH.h"
+#import "UIImage+Common.h"
+#import "UIColor+Common.h"
 #import "UIBarButtonItem+LJH.h"
+#import "SGActionView.h"
+#import "UIWindow+YUBottomPoper.h"
+#import "MSHttpTool.h"
 
 #define MAMapKey @"c766fa87ede2d62efd1045241b033b0f"
 #define IFlyMSCKey @"5564e28e"
@@ -72,6 +80,8 @@
 #define PlaceHolderImage @"timeline_image_placeholder"
 
 #define BGColor LJHColor(242, 242, 242)
+#define kDefaultLocationZoomLevel 16.1
 
+#define kLoginKey @"isLogin"
 
 #endif

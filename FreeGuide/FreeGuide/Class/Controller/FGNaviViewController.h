@@ -9,5 +9,5 @@
 #import "FGBaseViewController.h"
 
 @interface FGNaviViewController : FGBaseViewController
-
+@property (copy, nonatomic) NSString *currentCity;
 @end

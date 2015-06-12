@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FGNotifyImageAndTextViewController">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="qFD-ed-diz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaT-S8-P8O">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qingchengshan.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XPG-nY-C01">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="hiz-UT-w5p"/>
+                            </constraints>
+                        </imageView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWe-QR-8PR">
+                            <rect key="frame" x="0.0" y="200" width="320" height="368"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="368" id="jyn-kj-8BV"/>
+                            </constraints>
+                            <string key="text">青城山，全球道教主流教派全真道圣地，世界文化遗产，世界自然遗产（四川大熊猫栖息地），中国四大道教名山之一，全国重点文物保护单位，国家重点风景名胜区，国家AAAAA级旅游景区。
+青城山位于成都市都江堰市西南，东距成都市区68公里，处于都江堰水利工程西南10公里处。主峰老君阁海拔1260米。青城山群峰环绕起伏、林木葱茏幽翠，享有“青城天下幽”的美誉。青城山历史悠久，是中国道教发祥地之一，是全国道教十大洞天的第五洞天。青城山名胜古迹很多 ，古建筑各具特色，古今名人诗画词赋处处可见，有优美的风光和神奇的传说。全山宫观以天师洞为核心，建有建福宫、上清宫、祖师殿、圆明宫、玉清宫、朝阳洞等。青城山自古是文人墨客探幽访胜和隐居修练之地，古称“洞天福地”、“神仙都会”。青城山在历史上名称很多，曾叫“汶山”、“天谷山”、渎山、丈人山、赤城山、清城都、天国山等名。青城山被誉为“天下第五名山”。</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="XPG-nY-C01" firstAttribute="trailing" secondItem="xWe-QR-8PR" secondAttribute="trailing" id="20B-RP-QR7"/>
+                        <constraint firstAttribute="trailing" secondItem="XPG-nY-C01" secondAttribute="trailing" id="Gc2-QD-HJk"/>
+                        <constraint firstItem="XPG-nY-C01" firstAttribute="top" secondItem="BaT-S8-P8O" secondAttribute="top" id="SK2-h2-kge"/>
+                        <constraint firstItem="xWe-QR-8PR" firstAttribute="leading" secondItem="BaT-S8-P8O" secondAttribute="leading" id="f6P-5L-m8C"/>
+                        <constraint firstItem="XPG-nY-C01" firstAttribute="centerX" secondItem="BaT-S8-P8O" secondAttribute="centerX" id="k09-lF-Ybg"/>
+                        <constraint firstItem="xWe-QR-8PR" firstAttribute="top" secondItem="XPG-nY-C01" secondAttribute="bottom" id="ogu-Ia-UhS"/>
+                        <constraint firstAttribute="bottom" secondItem="xWe-QR-8PR" secondAttribute="bottom" id="wUQ-ZK-i4Z"/>
+                        <constraint firstItem="XPG-nY-C01" firstAttribute="leading" secondItem="xWe-QR-8PR" secondAttribute="leading" id="yqc-Jc-Baa"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BaT-S8-P8O" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1OB-ge-Soi"/>
+                <constraint firstAttribute="bottom" secondItem="BaT-S8-P8O" secondAttribute="bottom" id="9dx-3f-u6r"/>
+                <constraint firstItem="BaT-S8-P8O" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dSR-31-Rx7"/>
+                <constraint firstAttribute="trailing" secondItem="BaT-S8-P8O" secondAttribute="trailing" id="yLO-8m-VZz"/>
+            </constraints>
+            <point key="canvasLocation" x="357" y="305"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="qingchengshan.jpg" width="527" height="318"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

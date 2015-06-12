@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>latitude</key>
+		<string>30.897272</string>
+		<key>longitude</key>
+		<string>103.57292</string>
+		<key>title</key>
+		<string>青城前山</string>
+		<key>img</key>
+		<string>001.jpg</string>
+		<key>address</key>
+		<string>成都市都江堰市</string>
+		<key>des</key>
+		<string>青城山，全球道教主流教派全真道圣地，世界文化遗产，世界自然遗产（四川大熊猫栖息地），中国四大道教名山之一，全国重点文物保护单位，国家重点风景名胜区，国家AAAAA级旅游景区。</string>
+	</dict>
+	<dict>
+		<key>latitude</key>
+		<string>30.91898</string>
+		<key>longitude</key>
+		<string>103.494165</string>
+		<key>title</key>
+		<string>青城后山</string>
+		<key>img</key>
+		<string>004.jpg</string>
+		<key>address</key>
+		<string>成都市都江堰市</string>
+		<key>des</key>
+		<string>青城后山位于青城山后，泰安乡境内，距成都70公里，总面积约100平方公里。西北与卧龙自然保护区为邻，东北与赵公山相连，东越天仓山、乾元山可到天师洞、建福宫，西南与六顶山、天国山接壤，与青城山一脉相承，深藏不露，极具神秘色彩，直至80年代才加以开发。</string>
+	</dict>
+	<dict>
+		<key>latitude</key>
+		<string>30.921591</string>
+		<key>longitude</key>
+		<string>103.491328</string>
+		<key>title</key>
+		<string>泰安古镇</string>
+		<key>img</key>
+		<string>002.jpg</string>
+		<key>address</key>
+		<string>四川省都江堰市</string>
+		<key>des</key>
+		<string>泰安古镇环抱于幽静的四川省都江堰市的青城后山之中，是青城后山的第一景点，每逢佳节便引来游人无数。据了解，有史以来，泰安古镇便是扼成都平原西入大小金川的必经驿道上之重镇。古称“花坪老泽路”，唐时为味江寨，清时始依场后的古泰安寺易名为泰安场，是成都茂汶、金川物质交流的中转重镇，历来商贾云集，市场繁荣。
+泰安古镇牌碑
+泰安古镇牌碑
+据了解，有史以来，泰安古镇便是扼成都平原西入大小金川的必经驿道上之重镇。古称“花坪老泽路”，唐时为味江寨，清时始依场后的古泰安寺易名为泰安场，是成都茂汶、金川物质交流的中转重镇，历来商贾云集，市场繁荣。
+泰安古镇环抱于幽静的四川省都江堰市的青城后山之中，是青城后山的第一景点，每逢佳节便引来游人无数。
+泰安古镇牌碑
+泰安古镇牌碑
+据了解，有史以来，泰安古镇便是扼成都平原西入大小金川的必经驿道上之重镇。古称“花坪老泽路”，唐时为味江寨，清时始依场后的古泰安寺易名为泰安场，是成都茂汶、金川物质交流的中转重镇，历来商贾云集，市场繁荣。
+</string>
+	</dict>
+	<dict>
+		<key>latitude</key>
+		<string>30.910661</string>
+		<key>longitude</key>
+		<string>103.563654</string>
+		<key>title</key>
+		<string>上清宫</string>
+		<key>img</key>
+		<string>005.jpg</string>
+		<key>address</key>
+		<string>成都市都江堰市</string>
+		<key>des</key>
+		<string>道教宫观。在四川省都江堰市西南的青城山巅之阳，海拔1600多米。始建于晋代，后废，唐玄宗时又加修建，五代间前蜀王王衍重建，明末毁于火。现存殿宇建于1862—1874年间（清代同治年间），现有老君殿、三清殿、道德经堂、文武殿和玉皇殿。山门外丙侧石壁上刻有黄云鹄所题“天下第五名山”、“青城第一峰”题字。宫内有传为麻姑浴丹处的麻姑池以及鸳鸯井等名胜，珍藏有楠木刻板《道德经》、《阴符经》全文及张大千所画徐太妃、花蕊夫人与绛巾仙女石碑两通。宫东不远处有跑马坪、旗杆石，传为明末张献忠起义军练兵遗址。</string>
+	</dict>
+</array>
+</plist>

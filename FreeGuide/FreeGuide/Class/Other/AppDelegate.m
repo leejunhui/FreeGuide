@@ -10,6 +10,9 @@
 #import "FGHomeViewController.h"
 #import <iflyMSC/IFlySpeechUtility.h>
 #import "FGJingDianViewController.h"
+#import "FGNotifyNolyTextViewController.h"
+#import "FGNotifyImageAndTextViewController.h"
+#import "FGLoginViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -42,8 +45,8 @@
         int keyCode = [[note.userInfo valueForKey:@"key"] intValue];
         if (keyCode == 1)
         {
-            FGJingDianViewController *vc = [[FGJingDianViewController alloc] init];
-            vc.userInfo = note.userInfo;
+            FGNotifyImageAndTextViewController *vc = [[FGNotifyImageAndTextViewController alloc] initWithNibName:@"FGNotifyImageAndTextViewController" bundle:nil];
+//            vc.userInfo = note.userInfo;
             [[self.window.rootViewController.childViewControllers firstObject] pushViewController:vc
                                                                                          animated:YES];
         }
@@ -75,9 +78,10 @@
     int keyCode = [[notification.userInfo valueForKey:@"key"] intValue];
     if (keyCode == 1)
     {
-        FGJingDianViewController *vc = [[FGJingDianViewController alloc] init];
-        vc.userInfo = notification.userInfo;
-        [[[self.window.rootViewController.childViewControllers firstObject] navigationController] pushViewController:vc animated:YES];
+        FGNotifyImageAndTextViewController *vc = [[FGNotifyImageAndTextViewController alloc] initWithNibName:@"FGNotifyImageAndTextViewController" bundle:nil];
+//        vc.userInfo = notification.userInfo;
+        [[self.window.rootViewController.childViewControllers firstObject] presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES completion:nil];
+        [UIApplication sharedApplication].applicationIconBadgeNumber --;
     }
     
 }
@@ -86,7 +90,15 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGHomeViewController alloc] init]];
+    BOOL isLogin = [[NSUserDefaults standardUserDefaults]valueForKey:kLoginKey];
+    if (isLogin == YES)
+    {
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGHomeViewController alloc] init]];
+    }
+    else
+    {
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGLoginViewController alloc]initWithNibName:@"FGLoginViewController" bundle:nil]];
+    }
 }
 
 - (void)setupMap

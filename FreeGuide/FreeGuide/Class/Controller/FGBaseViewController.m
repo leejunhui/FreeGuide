@@ -16,7 +16,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = LJHColor(235, 235, 235);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
