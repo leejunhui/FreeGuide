@@ -113,6 +113,7 @@
 		2DCC30451B2581F500B83B50 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC30441B2581F500B83B50 /* UIImage+Common.m */; };
 		2DCC30481B2582A000B83B50 /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC30471B2582A000B83B50 /* UIColor+Common.m */; };
 		2DCC304A1B25849E00B83B50 /* Categorys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DCC30491B25849E00B83B50 /* Categorys.plist */; };
+		2DE8350C1B459E93001255E6 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE8350B1B459E93001255E6 /* Reveal.framework */; };
 		2DFEDE571B22FE6D00BFB6A6 /* FGNotifyNolyTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFEDE561B22FE6D00BFB6A6 /* FGNotifyNolyTextViewController.m */; };
 		2DFEDE591B22FEEE00BFB6A6 /* FGNotifyNolyTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DFEDE581B22FEEE00BFB6A6 /* FGNotifyNolyTextViewController.xib */; };
 /* End PBXBuildFile section */
@@ -311,6 +312,7 @@
 		2DCC30461B2582A000B83B50 /* UIColor+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Common.h"; sourceTree = "<group>"; };
 		2DCC30471B2582A000B83B50 /* UIColor+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Common.m"; sourceTree = "<group>"; };
 		2DCC30491B25849E00B83B50 /* Categorys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Categorys.plist; sourceTree = "<group>"; };
+		2DE8350B1B459E93001255E6 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		2DFEDE551B22FE6D00BFB6A6 /* FGNotifyNolyTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGNotifyNolyTextViewController.h; sourceTree = "<group>"; };
 		2DFEDE561B22FE6D00BFB6A6 /* FGNotifyNolyTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGNotifyNolyTextViewController.m; sourceTree = "<group>"; };
 		2DFEDE581B22FEEE00BFB6A6 /* FGNotifyNolyTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FGNotifyNolyTextViewController.xib; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D6D3F191B22DC850030199F /* CoreText.framework in Frameworks */,
+				2DE8350C1B459E93001255E6 /* Reveal.framework in Frameworks */,
 				2D5958851B156F0E004AF8F1 /* AudioToolbox.framework in Frameworks */,
 				2D5958831B156F06004AF8F1 /* SystemConfiguration.framework in Frameworks */,
 				2D5958811B156EFB004AF8F1 /* AddressBook.framework in Frameworks */,
@@ -918,6 +921,7 @@
 		F7099F2255913ADD45CAAA5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DE8350B1B459E93001255E6 /* Reveal.framework */,
 				2D6D3F181B22DC850030199F /* CoreText.framework */,
 				2DBADC8F1B15764900471403 /* sunflower */,
 				2D5958861B156F9D004AF8F1 /* iflyMSC.framework */,
@@ -1291,6 +1295,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FreeGuide/Class/Other/PrefixHeader.pch;
@@ -1312,6 +1317,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FreeGuide/Class/Other/PrefixHeader.pch;

@@ -51,31 +51,36 @@
     }
     else
     {
-        NSDictionary *param = @{@"userName":self.userNameView.text,
-                                @"passWord":self.userPassView.text
-                                };
-        [MSHttpTool getWithURL:@"http://czarl.top/User/Login" params:param success:^(id json){
-            if (json)
-            {
-                if ([json[@"IsSuccess"] boolValue] == YES)
-                {
-                    [ProgressHUD showSuccess:@"登录成功!"];
-                    
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLoginKey];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    
-                    self.view.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGHomeViewController alloc] init]];
-                }
-                else
-                {
-                    NSString *msg = json[@"Message"];
-                    [ProgressHUD showError:msg];
-                }
-            }
-
-        } failure:^(NSError *error) {
-            [ProgressHUD showError:@"网络错误了!"];
-        }];
+//        NSDictionary *param = @{@"userName":self.userNameView.text,
+//                                @"passWord":self.userPassView.text
+//                                };
+//        [MSHttpTool getWithURL:@"http://czarl.top/User/Login" params:param success:^(id json){
+//            if (json)
+//            {
+//                if ([json[@"IsSuccess"] boolValue] == YES)
+//                {
+//                    [ProgressHUD showSuccess:@"登录成功!"];
+//                    
+//                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLoginKey];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                    
+//                    self.view.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGHomeViewController alloc] init]];
+//                }
+//                else
+//                {
+//                    NSString *msg = json[@"Message"];
+//                    [ProgressHUD showError:msg];
+//                }
+//            }
+//
+//        } failure:^(NSError *error) {
+//            [ProgressHUD showError:@"网络错误了!"];
+//        }];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLoginKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        self.view.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[FGHomeViewController alloc] init]];
     }
 
 }
